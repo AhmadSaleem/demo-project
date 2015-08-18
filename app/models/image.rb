@@ -9,5 +9,6 @@ class Image < ActiveRecord::Base
     }
 
   validates_attachment_content_type :photo, content_type: 'image/jpeg'
+  validates :photo, presence: true
   attr_accessible :imageable_id, :imageable_type, :photo_content_type, :photo_file_name, :photo_file_size, :photo
 end
