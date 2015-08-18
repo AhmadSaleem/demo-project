@@ -31,6 +31,12 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
+  <div class="field">
+   <%= f.fields_for :image, resource.fetch_image do |image_fields| %>
+     <%= image_fields.file_field :photo %>
+   <% end %>
+ </div>
+
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>

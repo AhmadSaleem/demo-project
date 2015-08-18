@@ -37,6 +37,12 @@
     <%= f.password_field :current_password, autocomplete: "off" %>
   </div>
 
+  <div class="field">
+   <%= f.fields_for :image, current_user.fetch_image do |image_fields| %>
+     <%= image_fields.file_field :photo %>
+   <% end %>
+ </div>
+
   <div class="actions">
     <%= f.submit "Update" %>
   </div>
