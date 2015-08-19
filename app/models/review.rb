@@ -4,4 +4,6 @@ class Review < ActiveRecord::Base
 
   belongs_to :product
 
+  validates :body, presence: true, length: { minimum: 20 }
+
 end
