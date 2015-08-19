@@ -3,6 +3,7 @@ class Product < ActiveRecord::Base
   PER_PAGE_SIZE = 5
 
   has_many :images, as: :imageable, dependent: :destroy
+  has_many :reviews, dependent: :destroy
 
   attr_accessible :body, :price, :title, :images_attributes
 

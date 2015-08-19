@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150819041807) do
+ActiveRecord::Schema.define(:version => 20150819043028) do
 
   create_table "images", :force => true do |t|
     t.integer  "imageable_id"
@@ -36,7 +36,10 @@ ActiveRecord::Schema.define(:version => 20150819041807) do
     t.text     "body"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "product_id"
   end
+
+  add_index "reviews", ["product_id"], :name => "index_reviews_on_product_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                                :default => "", :null => false
