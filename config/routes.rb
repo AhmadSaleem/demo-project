@@ -2,6 +2,7 @@ Demo::Application.routes.draw do
   resources :products do
     resources :reviews
   end
+  resources :users
 
   devise_for :users
 
