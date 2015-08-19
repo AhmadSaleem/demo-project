@@ -19,5 +19,25 @@
   <%= image_tag image.photo.url(:small) %>
 <% end %>
 
+<h2>Reviews</h2>
+<% @product.reviews.each do |review| %>
+  <p>
+    <strong>Review:</strong>
+    <%= review.body %>
+  </p>
+<% end %>
+
+<h2>Add a review:</h2>
+<%= form_for([@product, @product.reviews.build]) do |f| %>
+  <p>
+    <%= f.label :body %><br>
+    <%= f.text_area :body %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+<%= link_to 'Reviews', product_reviews_path(@product) %> |
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>
