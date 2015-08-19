@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
 
   has_one :image, as: :imageable, dependent: :destroy
   accepts_nested_attributes_for :image
+  has_many :products, dependent: :destroy
 
   def fetch_image
     self.image.present? ? self.image : self.build_image
