@@ -21,12 +21,14 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @review = @product.reviews.create(params[:review])
+    @review = @product.reviews.build(params[:review])
     respond_to do |format|
       if @review.save
-        format.html { redirect_to [@product, @review], notice: 'Review was successfully created.' }
+        format.html { redirect_to @product, notice: 'Review was successfully created.' }
+        format.js
       else
         format.html { render action: "edit" }
+        format.js
       end
     end
   end
