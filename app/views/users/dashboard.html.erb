@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h2> Personal Information </h2>
+<h1>Personal Information</h1>
 
 <p>
   <b>Email:</b>
@@ -17,7 +17,7 @@
   <%= image_tag current_user.image.photo.url(:small) unless current_user.image.nil? %>
 </p>
 
-<h1> Your Products </h1>
+<h1>Your Products</h1>
 
 <%= paginate @products %>
 
@@ -32,7 +32,7 @@
 
 <%= paginate @products %>
 
-<h1> Your Reviews </h1>
+<h1>Your Reviews</h1>
 
 <%= paginate @reviews %>
 
