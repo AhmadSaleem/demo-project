@@ -26,5 +26,8 @@
 
 <%= render 'reviews/add_review' %>
 
-<%= link_to 'Edit', edit_product_path(@product) %> |
+<% if authorized_user?(@product.user) %>
+  <%= link_to 'Edit', edit_product_path(@product) %>
+<% end %>
+
 <%= link_to 'Back', products_path %>

@@ -5,6 +5,6 @@
   <%= @review.body %>
 </p>
 
+<%= link_to 'Edit', edit_product_review_path(@review.product, @review) if authorized_user?(@review.user) %>
 
-<%= link_to 'Edit', edit_product_review_path(@review.product, @review) %> |
 <%= link_to 'Back', product_reviews_path(@review.product) %>

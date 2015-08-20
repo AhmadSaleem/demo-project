@@ -1,12 +1,17 @@
-<h2>Add a review:</h2>
-<%= form_for([@product, @review], remote: true, html: { id: 'add-review-form' }) do |f| %>
-  <p>
-    <%= f.label :body %><br>
-    <%= f.text_area :body, required: true %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
+<% if user_signed_in? %>
+  <% unless authorized_user?(@product.user) %>
+    <h2>Add a review:</h2>
+    <%= form_for([@product, @review], remote: true, html: { id: 'add-review-form' }) do |f| %>
+      <p>
+        <%= f.label :body %><br>
+        <%= f.text_area :body, required: true %>
+      </p>
+      <p>
+        <%= f.submit %>
+      </p>
+    <% end %>
+  <% end %>
+<%else %>
+  <%= link_to 'Sign In to review the product', user_session_path %>
 <% end %>
-
 <%= link_to 'Reviews', product_reviews_path(@product) %>
