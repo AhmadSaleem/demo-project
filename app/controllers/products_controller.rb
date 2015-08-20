@@ -47,6 +47,6 @@ class ProductsController < ApplicationController
     end
 
     def authorize_user
-      redirect_to products_path, notice: "Only the product owner can perform this action." unless is_valide?(@product.user)
+      redirect_to products_path, notice: "Only the product owner can perform this action." unless is_valid?(@product.user)
     end
 end
