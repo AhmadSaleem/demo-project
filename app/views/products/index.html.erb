@@ -17,8 +17,10 @@
     <td><%= product.body %></td>
     <td><%= product.price %></td>
     <td><%= link_to 'Show', product %></td>
-    <td><%= link_to 'Edit', edit_product_path(product) %></td>
-    <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% if authorized_user?(product.user) %>
+      <td><%= link_to 'Edit', edit_product_path(product) %></td>
+      <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
@@ -27,4 +29,8 @@
 
 <%= paginate @products %>
 
+<% if user_signed_in? %>
 <%= link_to 'New Product', new_product_path %>
+<%else %>
+  <%= link_to 'Sign In to add a new product', user_session_path %>
+<% end %>
