@@ -75,8 +75,4 @@ class ReviewsController < ApplicationController
       redirect_to product_reviews_path, notice:"You are not authorized to perform this action." unless is_valid?(@review.user) || is_valid?(@product.user)
     end
 
-    def is_valid?(user)
-      current_user == user
-    end
-
 end
