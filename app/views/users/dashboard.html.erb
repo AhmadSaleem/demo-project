@@ -14,7 +14,7 @@
 
 <p>
   <b>Profile Picture:</b>
-  <%= image_tag current_user.image.photo.url(:small) unless current_user.image.nil? %>
+  <%= image_tag current_user.image.photo.url(:small) if current_user.image.present? %>
 </p>
 
 <h1>Your Products</h1>
@@ -22,7 +22,7 @@
 <%= paginate @products %>
 
 <% @products.each do |product| %>
-  <div><%= image_tag product.images.first.photo.url(:small) unless product.images.first.nil? %></div>
+  <div><%= image_tag product.images.first.photo.url(:small) if product.images.first.present? %></div>
   <div><%= product.title %></div>
   <div><%= product.price %></div>
   <div><%= link_to 'Show', product %></div>
