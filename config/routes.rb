@@ -2,10 +2,11 @@ Demo::Application.routes.draw do
   resources :products do
     resources :reviews
   end
-  resources :users
 
   devise_for :users
 
+  resources :users, only:[:show]
+  get 'dashboard', to: 'users#dashboard'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

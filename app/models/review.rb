@@ -7,4 +7,6 @@ class Review < ActiveRecord::Base
 
   validates :body, presence: true, length: { minimum: 20 }
 
+  scope :ordered, -> { order("created_at desc") }
+
 end
