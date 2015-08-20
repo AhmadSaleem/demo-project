@@ -8,6 +8,8 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.includes(:image).find(params[:id])
+    @products = @user.products.includes(:images).ordered.page(params[:page]).per(User::PER_PAGE_SIZE)
   end
 
 end

@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<h2>Personal Information</h2>
+
+<p>
+  <b>Email:</b>
+  <%= @user.email %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @user.first_name %> <%= @user.last_name %>
+</p>
+
+<p>
+  <b>Profile Picture:</b>
+  <%= image_tag @user.image.photo.url(:small) if @user.image.present? %>
+</p>
+
+<h2>User's Products</h2>
+
+<%= paginate @products %>
+
+<% @products.each do |product| %>
+  <div><%= image_tag product.images.first.photo.url(:small) %></div>
+  <div><%= product.title %></div>
+  <div><%= product.price %></div>
+<% end %>
+
+<%= paginate @products %>
