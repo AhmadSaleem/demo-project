@@ -27,6 +27,7 @@ gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 gem "nested_form"
 gem 'kaminari'
 gem 'activeadmin'
+gem 'html5_validators'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
