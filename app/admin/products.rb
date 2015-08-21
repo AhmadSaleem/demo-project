@@ -1,6 +1,6 @@
 ActiveAdmin.register Product do
 
-  actions :all, :except => [:edit]
+  actions :all, :except => [:edit, :new]
 
   index do
     column :title
