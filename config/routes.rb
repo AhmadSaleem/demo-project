@@ -1,4 +1,5 @@
 Demo::Application.routes.draw do
+  root :to => 'products#index'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
@@ -12,7 +13,6 @@ Demo::Application.routes.draw do
   resources :users, only:[:show]
   get 'dashboard', to: 'users#dashboard'
 
-  root :to => 'products#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
