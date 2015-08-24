@@ -1,23 +1,21 @@
-<h1>Listing reviews</h1>
+<h1>Listing reviews for <%= link_to @product.title, product_path(@product) %></h1>
 
 <table>
-  <tr>
-    <th>Body</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
 
 <% @reviews.each do |review| %>
   <tr>
+    <td><%= link_to render_name(review.user) + ": " , user_path(review.user) %></td>
     <td><%= review.body %></td>
-    <td><%= link_to 'Show', [review.product, review] %></td>
+    <td>&nbsp;</td>
+    <td><%= button_to("Show", [review.product, review], class: "btn btn-primary") %></td>
+    <td>&nbsp;</td>
     <% if authorized_user?(review.user) %>
-      <td><%= link_to 'Edit', edit_product_review_path(review.product, review) %></td>
-      <td><%= link_to 'Destroy', [review.product, review] , method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= button_to("Edit", edit_product_review_path(review.product, review), class: "btn btn-primary") %></td>
+      <td>&nbsp;</td>
+      <td><%= button_to("Delete", [review.product, review] , method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary") %></td>
     <% end %>
     <% if authorized_user?(@product.user) %>
-      <td><%= link_to 'Destroy', [review.product, review] , method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= button_to("Delete", [review.product, review] , method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary") %></td>
     <% end %>
   </tr>
 <% end %>

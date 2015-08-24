@@ -1,14 +1,14 @@
 <% if user_signed_in? %>
   <% unless authorized_user?(@product.user) %>
     <h2>Add a review:</h2>
-    <%= form_for([@product, @review], remote: true, html: { id: 'add-review-form' }) do |f| %>
-      <p>
+    <%= form_for([@product, @review], remote: true, html: { class: "form-horizontal", id: 'add-review-form' }) do |f| %>
+      <div class="form-group">
         <%= f.label :body %><br>
-        <%= f.text_area :body, required: true %>
-      </p>
-      <p>
+        <%= f.text_area :body, required: true, class:"form-control" %>
+      </div>
+      <div class="form-group">
         <%= f.submit %>
-      </p>
+      </div>
     <% end %>
   <% end %>
 <%else %>

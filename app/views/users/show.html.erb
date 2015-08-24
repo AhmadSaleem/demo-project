@@ -1,30 +1,42 @@
 <p id="notice"><%= notice %></p>
 
-<h2>Personal Information</h2>
-
-<p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
-
-<p>
-  <b>Name:</b>
-  <%= @user.first_name %> <%= @user.last_name %>
-</p>
-
-<p>
-  <b>Profile Picture:</b>
-  <%= image_tag @user.image.photo.url(:small) if @user.image.present? %>
-</p>
+<div class="container">
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-sm-4 col-lg-4 col-md-4">
+        <div class="thumbnail thumb">
+          <%= image_tag render_photo(@user.image), class: "img img-responsive" %>
+          <div class="caption">
+            <h4 class="pull-right"><%= @user.email %></h4>
+            <h4><%= link_to render_name(@user), user_path(@user) %></h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <h2>User's Products</h2>
 
 <%= paginate @products %>
 
-<% @products.each do |product| %>
-  <div><%= image_tag product.images.first.photo.url(:small) %></div>
-  <div><%= product.title %></div>
-  <div><%= product.price %></div>
-<% end %>
+<div class="container">
+  <div class="col-md-12">
+    <div class="row">
+      <% @products.each do |product| %>
+        <div class="col-sm-4 col-lg-4 col-md-4">
+          <div class="thumbnail product-thumb">
+            <%= image_tag render_photo(product.images.first), class: "img img-responsive" %>
+            <div class="caption">
+              <h4 class="pull-right">Rs. <%=  product.price.to_s %></h4>
+              <h4><%= link_to product.title, product %></h4>
+              <%= button_to("Details...", product, class: "btn btn-primary", method: :get) %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
 
 <%= paginate @products %>

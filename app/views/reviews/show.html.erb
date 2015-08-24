@@ -1,9 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Body:</b>
-  <%= @review.body %>
-</p>
+<div class="caption-full">
+  <%= link_to render_name(@review.user), user_path(@review.user) %>
+  <span>says about this product: "<%= @review.body %>"</span>
+</div>
 
 <%= link_to 'Edit', edit_product_review_path(@review.product, @review) if authorized_user?(@review.user) %>
 
