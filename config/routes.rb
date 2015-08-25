@@ -1,4 +1,16 @@
 Demo::Application.routes.draw do
+  get "carts/show"
+
+  get "carts/add_to_cart"
+
+  get "carts/remove_from_cart"
+
+  get "cart/show"
+
+  get "cart/add_to_cart"
+
+  get "cart/remove_from_cart"
+
   resources :orders
 
 
