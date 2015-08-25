@@ -5,8 +5,8 @@ class Image < ActiveRecord::Base
   belongs_to :imageable, polymorphic: true
   has_attached_file :photo,
     styles: {
-      small: "100",
-      full: "400",
+      small: "100x100#",
+      full: "400x400#",
     }
 
   validates_attachment_content_type :photo, content_type: 'image/jpeg'
