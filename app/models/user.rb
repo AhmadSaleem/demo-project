@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :image
   has_many :products, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  has_many :orders, dependent: :destroy
 
   def fetch_image
     self.image.present? ? self.image : self.build_image
