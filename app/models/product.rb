@@ -6,6 +6,8 @@ class Product < ActiveRecord::Base
 
   has_many :images, as: :imageable, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  has_many :orders, through: :order_products, dependent: :destroy
+  has_many :order_products, dependent: :destroy
   accepts_nested_attributes_for :images, allow_destroy: true
   belongs_to :user
 
