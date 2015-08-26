@@ -1,6 +1,9 @@
+<%= render 'modal' %>
+
 <h1>Listing products</h1>
 
 <%= paginate @products %>
+
 <div class="container">
   <div class="col-md-12">
     <div class="row">
@@ -8,9 +11,13 @@
         <div class="col-sm-4 col-lg-4 col-md-4">
           <div class="thumbnail product-thumb">
             <%= image_tag render_photo(product.images.first), class: "img img-responsive" %>
-            <div class="caption">
+            <div class="caption inline">
               <h4 class="pull-right">Rs. <%= product.price.to_s %></h4>
               <h4><%= link_to product.title, product %></h4>
+              <%= link_to 'Add to cart', carts_add_to_cart_path, id: "add-#{product.id}", data: { remote: true, target: '#myModal', toggle: 'modal', params: { product_id: product.id }.to_param }, class: 'btn btn-default pull-right' if @cart.nil?%>
+              <% unless @cart.nil? || @cart.include?(product.id) %>
+                <%= link_to 'Add to cart', carts_add_to_cart_path, id: "add-#{product.id}", data: { remote: true, target: '#myModal', toggle: 'modal', params: { product_id: product.id }.to_param }, class: 'btn btn-default pull-right' %>
+              <% end %>
               <%= button_to("Details...", product, method: :get, class: "btn btn-primary") %>
             </div>
           </div>
@@ -21,6 +28,7 @@
 </div>
 
 <%= paginate @products %>
+
 <div>
   <% if user_signed_in? %>
     <%= button_to("Add a new product", new_product_path, class: "btn btn-primary", method: :get) %>

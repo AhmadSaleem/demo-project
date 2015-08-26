@@ -32,6 +32,12 @@
         <% else %>
           <li><%= link_to "Sign in", user_session_path %></li>
         <% end %>
+        <li>
+          <%= link_to carts_show_path do %>
+            <span class="glyphicon glyphicon-shopping-cart"></span>
+            <span id="cart-items" class="badge"><%= @size %></span>
+          <% end %>
+        </li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>

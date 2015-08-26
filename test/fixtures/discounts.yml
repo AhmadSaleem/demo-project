@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  coupon: MyString
+  percentage: 1.5
+  active: false
+
+two:
+  coupon: MyString
+  percentage: 1.5
+  active: false
