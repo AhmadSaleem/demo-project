@@ -22,8 +22,8 @@
         <tr>
           <td> Total Price: </td>
           <td id="total-price"><%= @total_price %></td>
-          <td></td>
-          <td></td>
+          <td> Discount Offered:</td>
+          <td id="show-discount"><%= @total_discount %></td>
         </tr>
       </table>
     </div>
@@ -31,6 +31,19 @@
     <div class="form-group">
       <label id="payable-amount">Payable amount: <%= @payable_amount %></label>
     </div>
+
+    <%= form_for(@discount, remote: true, html: { class: "form-horizontal", id: 'get-discount' }) do |f| %>
+      <div class="form-group">
+        <%= f.text_field :coupon, class:"form-control", placeholder: "Enter a valid coupon to avail discount" %>
+        <label id="valid-coupon"></label>
+      </div>
+      <div class="form-group">
+        <%= f.submit class: 'btn btn-success', value: "Get Discount" %>
+      </div>
+      <div class="form-group">
+        <%= link_to "Checkout", products_path, class: "btn btn-success" %>
+      </div>
+    <% end %>
 
   </div>
 </div>

@@ -1,0 +1,5 @@
+<% if @total_discount.zero? %>
+  $('#valid-coupon').text("Invalid Coupon");
+<% end %>
+$('#show-discount').text(<%= @total_discount %>);
+$('#payable-amount').text("Payable amount: " + <%= @payable_amount %>);

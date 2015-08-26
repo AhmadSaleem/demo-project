@@ -1,9 +1,10 @@
 class CartsController < ApplicationController
   before_filter :fetch_product, only: [:add_to_cart, :remove_from_cart]
-  before_filter :set_price, only: [:show]
+  before_filter :calculate_amounts, only: [:show, :discount]
 
   def show
     @products = Product.find(get_products(cookies[:products])) if cookies[:products]
+    @discount = Discount.new
   end
 
   def add_to_cart
@@ -30,12 +31,23 @@ class CartsController < ApplicationController
     end
 
     get_size
-    set_price
+    calculate_amounts
+  end
+
+  def discount
+    calculate_amounts
+    respond_to do |format|
+      format.html { redirect_to carts_show_path }
+      format.js
+    end
+
   end
 
   private
-    def set_price
+    def calculate_amounts
       @total_price = Product.find(get_products(cookies[:products])).sum(&:price) if cookies[:products]
+      @total_discount = Discount.calculate_discount(params, @total_price)
+      @payable_amount = @total_price - @total_discount
     end
 
     def fetch_product
