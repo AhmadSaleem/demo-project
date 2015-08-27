@@ -21,7 +21,7 @@
         <% end %>
         <tr>
           <td> Total Price: </td>
-          <td id="total-price"><%= @total_price %></td>
+          <td id="total-price">Rs. <%= @total_price %></td>
           <td> Discount Offered:</td>
           <td id="show-discount"><%= @total_discount %></td>
         </tr>
@@ -29,7 +29,7 @@
     </div>
 
     <div class="form-group">
-      <label id="payable-amount">Payable amount: <%= @payable_amount %></label>
+      <label id="payable-amount">Payable amount: Rs. <%= @payable_amount %></label>
     </div>
 
     <%= form_for(@discount, remote: true, html: { class: "form-horizontal", id: 'get-discount' }) do |f| %>

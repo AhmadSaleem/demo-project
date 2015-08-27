@@ -45,6 +45,7 @@ class CartsController < ApplicationController
 
   private
     def calculate_amounts
+      @total_price = 0 unless cookies[:products]
       @total_price = Product.find(get_products(cookies[:products])).sum(&:price) if cookies[:products]
       @total_discount = Discount.calculate_discount(params, @total_price)
       @payable_amount = @total_price - @total_discount
