@@ -1,5 +1,7 @@
-<% if @total_discount.zero? %>
-  $('#valid-coupon').text("Invalid Coupon");
+<% unless @total_discount.zero? %>
+  $('#get-discount').hide();
 <% end %>
 $('#show-discount').text(<%= @total_discount %>);
 $('#payable-amount').text("Payable amount: " + <%= @payable_amount %>);
+$("#notice").html("<%= flash[:notice] %>");
+$("#alert").html("<%= flash[:alert] %>");

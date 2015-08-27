@@ -1,6 +1,7 @@
 class CartsController < ApplicationController
   before_filter :fetch_product, only: [:add_to_cart, :remove_from_cart]
   before_filter :calculate_amounts, only: [:show, :discount]
+  after_filter :discard_flash, only: [:discount]
 
   def show
     @products = Product.find(get_products(cookies[:products])) if cookies[:products]
@@ -35,8 +36,9 @@ class CartsController < ApplicationController
   end
 
   def discount
-    calculate_amounts
     respond_to do |format|
+      flash[:notice] = "Coupon is valid" unless @total_discount.zero?
+      flash[:alert] = "Coupon is invalid" if @total_discount.zero?
       format.html { redirect_to carts_show_path }
       format.js
     end
@@ -45,9 +47,11 @@ class CartsController < ApplicationController
 
   private
     def calculate_amounts
+      cookies[:coupon] = params[:discount][:coupon] if params[:discount]
       @total_price = Product.find(get_products(cookies[:products])).sum(&:price) if cookies[:products]
-      @total_discount = Discount.calculate_discount(params, @total_price)
-      @payable_amount = @total_price.to_i - @total_discount
+      @total_discount = Discount.calculate_discount(cookies[:coupon], @total_price)
+      cookies.delete :coupon if @total_discount.zero?
+      @payable_amount = @total_price.to_f - @total_discount
     end
 
     def fetch_product
@@ -56,5 +60,9 @@ class CartsController < ApplicationController
 
     def add_product(array)
       ActiveSupport::JSON.encode(array)
+    end
+
+    def discard_flash
+      flash.discard if request.xhr?
     end
 end
