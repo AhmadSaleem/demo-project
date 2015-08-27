@@ -1,4 +1,5 @@
 <div class="thumbnail show-thumb">
+  <% @product.images.build if @product.images.blank? %>
   <%= image_tag render_photo(@product.images.first), class: "img img-responsive" %>
   <div class="caption-full">
     <h4 class="pull-right">Rs. <%= @product.price.to_s %></h4>

@@ -7,7 +7,8 @@ class Image < ActiveRecord::Base
     styles: {
       small: "100x100#",
       full: "400x400#",
-    }
+    },
+    default_url: 'default_:style.jpg'
 
   validates_attachment_content_type :photo, content_type: 'image/jpeg'
   validates :photo, presence: true
