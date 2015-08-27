@@ -26,7 +26,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
-          <li><%= link_to render_name(current_user) %></li>
+          <li><%= link_to "New Product", new_product_path %></li>
+          <li><%= link_to render_name(current_user), user_path(current_user) %></li>
           <li><%= link_to "Dashboard", dashboard_path %></li>
           <li><%= link_to "Sign out",  destroy_user_session_path, :method => :delete %></li>
         <% else %>
