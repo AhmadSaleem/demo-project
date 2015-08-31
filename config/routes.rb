@@ -5,7 +5,7 @@ Demo::Application.routes.draw do
   get "carts/remove_from_cart"
   post 'discounts', to: 'carts#discount'
 
-  resources :orders
+  resources :orders, only: [:new, :create]
 
   root :to => 'products#index'
   devise_for :admin_users, ActiveAdmin::Devise.config

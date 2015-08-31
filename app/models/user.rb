@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :image_attributes
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :image_attributes, :shipping_address
 
   has_one :image, as: :imageable, dependent: :destroy
   accepts_nested_attributes_for :image

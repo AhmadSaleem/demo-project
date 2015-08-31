@@ -1,29 +1,54 @@
-<%= form_for(@order) do |f| %>
-  <% if @order.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+<% if @cart.blank? %>
+  <h4>Your Cart is Empty. Please fill it with some items first.</h4>
+<% elsif @order.total_price < 100 %>
+  <h4>You need to have items worth at least Rs. 100 in your cart to get them delivered.</h4>
+<% else %>
+  <%= form_for(@order) do |f| %>
+    <% if @order.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+        <ul>
+        <% @order.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-      <ul>
-      <% @order.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+    <%= f.hidden_field :stripe_card_token %>
+    <div class="field">
+      <%= f.label :total_price %><br />
+      <%= f.text_field :total_price, readonly: true %>
+    </div>
+    <div class="field">
+      <%= f.label :shipping_address, "Shipping Address" %>
+      <%= f.text_area :shipping_address, rows: "3" %>
+    </div>
+    <div class="field">
+      <%= f.hidden_field :discount %>
+    </div>
+    <% if @order.stripe_card_token.present? %>
+      Credit card has been provided. You just need to confirm the shipping address.
+    <% else %>
+      <div class="field">
+        <%= label_tag :card_number, "Credit Card Number" %>
+        <%= text_field_tag :card_number, nil, name: nil %>
+      </div>
+      <div class="field">
+        <%= label_tag :card_code, "Security Code on Card (CVV)" %>
+        <%= text_field_tag :card_code, nil, name: nil %>
+      </div>
+      <div class="field">
+        <%= label_tag :card_month, "Card Expiration" %>
+        <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"} %>
+        <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"} %>
+      </div>
+    <% end %>
+    <div class="actions">
+      <%= f.submit %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :total_price %><br />
-    <%= f.text_field :total_price %>
-  </div>
-  <div class="field">
-    <%= f.label :discount %><br />
-    <%= f.text_field :discount %>
-  </div>
-  <div class="field">
-    <%= f.label :user_id %><br />
-    <%= f.number_field :user_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div id="stripe_error">
+    <noscript>JavaScript is not enabled and is required for this form. First enable it in your web browser settings.</noscript>
   </div>
 <% end %>

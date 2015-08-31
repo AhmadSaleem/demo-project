@@ -48,10 +48,13 @@ class CartsController < ApplicationController
   private
     def calculate_amounts
       cookies[:coupon] = params[:discount][:coupon] if params[:discount]
+      @total_price = 0 unless cookies[:products]
       @total_price = Product.find(get_products(cookies[:products])).sum(&:price) if cookies[:products]
       @total_discount = Discount.calculate_discount(cookies[:coupon], @total_price)
       cookies.delete :coupon if @total_discount.zero?
       @payable_amount = @total_price.to_f - @total_discount
+      cookies[:payable_amount] = @payable_amount
+      cookies[:discount] = @total_discount
     end
 
     def fetch_product
