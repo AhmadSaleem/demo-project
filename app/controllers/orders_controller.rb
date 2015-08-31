@@ -24,6 +24,8 @@ class OrdersController < ApplicationController
       current_user.shipping_address = params[:order][:shipping_address] unless current_user.shipping_address == params[:order][:shipping_address]
       current_user.save
       OrderProduct.save_details(@cart, @order)
+      payment_info = { user: @current_user, total: cookies[:payable_amount], discount: cookies[:discount] }
+      UserMailer.send_receipt(payment_info).deliver
       cookies.delete :products
       redirect_to products_path, notice: "Thank you for buying!"
     else
