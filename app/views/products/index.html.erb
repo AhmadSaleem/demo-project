@@ -2,6 +2,19 @@
 
 <h1>Listing products</h1>
 
+<div class="pull-right">
+  <form class="navbar-form" role="search">
+    <div class="form-group">
+      <%= text_field_tag :search %>
+    </div>
+    <div class="form-group">
+      <%= link_to products_path, type: "submit", class: "btn btn-default" do %>
+        <span class="glyphicon glyphicon-search"></span>
+      <% end %>
+    </div>
+  </form>
+</div>
+
 <%= paginate @products %>
 
 <div class="container">
@@ -15,11 +28,11 @@
             <div class="caption inline">
               <h4 class="pull-right">Rs. <%= product.price.to_s %></h4>
               <h4><%= link_to product.title, product %></h4>
-              <%= link_to 'Add to cart', carts_add_to_cart_path, id: "add-#{product.id}", data: { remote: true, target: '#myModal', toggle: 'modal', params: { product_id: product.id }.to_param }, class: 'btn btn-default pull-right' if @cart.nil?%>
+              <%= link_to 'Add to cart', carts_add_to_cart_path, id: "add-#{product.id}", data: { remote: true, target: '#myModal', toggle: 'modal', params: { product_id: product.id }.to_param }, class: 'btn btn-primary pull-right' if @cart.blank? %>
               <% unless @cart.nil? || @cart.include?(product.id) %>
-                <%= link_to 'Add to cart', carts_add_to_cart_path, id: "add-#{product.id}", data: { remote: true, target: '#myModal', toggle: 'modal', params: { product_id: product.id }.to_param }, class: 'btn btn-default pull-right' %>
+                <%= link_to 'Add to cart', carts_add_to_cart_path, id: "add-#{product.id}", data: { remote: true, target: '#myModal', toggle: 'modal', params: { product_id: product.id }.to_param }, class: 'btn btn-primary pull-right' %>
               <% end %>
-              <%= button_to("Details...", product, method: :get, class: "btn btn-primary") %>
+              <%= button_to("Details...", product, method: :get, class: "btn btn-default") %>
             </div>
           </div>
         </div>

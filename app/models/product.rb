@@ -16,4 +16,24 @@ class Product < ActiveRecord::Base
 
   scope :ordered, -> { order("created_at desc") }
 
+  define_index do
+    indexes title, sortable: true
+    indexes body
+    set_property delta: true
+  end
+
+  def self.perform_search(options)
+    options = {} if options.blank?
+    search_params  = default_search_options(options)
+    self.search options[:search], search_params
+  end
+
+  def self.default_search_options(options)
+    {
+      order: "id DESC",
+      page: options[:page],
+      per_page: PER_PAGE_SIZE,
+    }
+  end
+
 end

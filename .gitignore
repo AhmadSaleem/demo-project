@@ -14,3 +14,6 @@
 /log/*.log
 /tmp
 /public/system
+/config/development.sphinx.conf
+/db/sphinx/
+/log
