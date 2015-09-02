@@ -12,4 +12,9 @@ module ApplicationHelper
     image.photo.url(:small)
   end
 
+  def render_large_photo(image)
+    return if image.blank?
+    image.photo.url(:full)
+  end
+
 end

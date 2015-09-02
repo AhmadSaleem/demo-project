@@ -5,8 +5,9 @@ class Image < ActiveRecord::Base
   belongs_to :imageable, polymorphic: true
   has_attached_file :photo,
     styles: {
-      small: "100x100#",
-      full: "400x400#",
+      small: "120x120>",
+      medium: "250x250>",
+      full: "500x500>",
     },
     default_url: 'default_:style.jpg'
 

@@ -1,4 +1,4 @@
-<div class="caption-full">
-  <%= link_to render_name(review.user), user_path(review.user) %>
-  <span>says about this product: "<%= review.body %>"</span>
-</div>
+<blockquote>
+  <p><%= review.body %></p>
+  <footer><%= link_to render_name(review.user), user_path(review.user) %></footer>
+</blockquote>
