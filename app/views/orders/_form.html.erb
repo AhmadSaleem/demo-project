@@ -16,13 +16,10 @@
     <% end %>
 
     <%= f.hidden_field :stripe_card_token %>
-    <div class="field">
-      <%= f.label :total_price %><br />
-      <%= f.text_field :total_price, readonly: true %>
-    </div>
+    <label id="payable-amount">Payable amount: Rs. <b><%= @order.total_price %><b></label>
     <div class="field">
       <%= f.label :shipping_address, "Shipping Address" %>
-      <%= f.text_area :shipping_address, rows: "3" %>
+      <%= f.text_area :shipping_address, rows: "3", class: "form-control" %>
     </div>
     <div class="field">
       <%= f.hidden_field :discount %>
@@ -32,11 +29,11 @@
     <% else %>
       <div class="field">
         <%= label_tag :card_number, "Credit Card Number" %>
-        <%= text_field_tag :card_number, nil, name: nil %>
+        <%= text_field_tag :card_number, nil, name: nil, class: "form-control" %>
       </div>
       <div class="field">
         <%= label_tag :card_code, "Security Code on Card (CVV)" %>
-        <%= text_field_tag :card_code, nil, name: nil %>
+        <%= text_field_tag :card_code, nil, name: nil, class: "form-control" %>
       </div>
       <div class="field">
         <%= label_tag :card_month, "Card Expiration" %>
@@ -45,7 +42,7 @@
       </div>
     <% end %>
     <div class="actions">
-      <%= f.submit %>
+      <%= f.submit "Place your order", class: "btn btn-primary" %>
     </div>
   <% end %>
   <div id="stripe_error">
