@@ -1,21 +1,30 @@
-<%= form_for([@review.product, @review]) do |f| %>
-  <% if @review.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
+<div container>
+  <div class="col-sm-12 col-md-12 col-lg-12">
+    <ol class="breadcrumb">
+      <li><%= link_to "Home", products_path %></li>
+      <li><%= link_to @review.product.title, product_path(@review.product) %></li>
+      <li><%= link_to "All Reviews", product_reviews_path(@review.product) %></li>
+      <li class="active">Form</li>
+    </ol>
 
-      <ul>
-      <% @review.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+    <%= form_for([@review.product, @review]) do |f| %>
+      <% if @review.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
+          <ul>
+            <% @review.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :body %><br />
-    <%= f.text_area :body %>
+      <div class="field">
+        <%= f.text_area :body, rows: 10 %>
+      </div>
+      <div class="actions">
+        <%= f.submit class: "btn btn-primary" %>
+      </div>
+    <% end %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

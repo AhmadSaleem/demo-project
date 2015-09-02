@@ -1,4 +1,25 @@
 <blockquote>
-  <p><%= review.body %></p>
+  <p><%= render_review(review) %></p>
+  <div class="pull-right">
+    <%= link_to [review.product, review] do %>
+      <span class="glyphicon glyphicon-folder-open" title="Open"></span>
+    <% end %>
+
+    <% if authorized_user?(review.user) %>
+      <%= link_to edit_product_review_path(review.product, review) do %>
+        <span class="glyphicon glyphicon-edit" title="Edit"></span>
+      <% end %>
+      <%= link_to [review.product, review], method: :delete, data: { confirm: 'Are you sure?' } do %>
+        <span class="glyphicon glyphicon-remove-circle" title="Delete"></span>
+      <% end %>
+    <% end %>
+
+    <% if authorized_user?(@product.user) %>
+      <%= link_to [review.product, review], method: :delete, data: { confirm: 'Are you sure?' } do %>
+        <span class="glyphicon glyphicon-remove-circle" title="Delete"></span>
+      <% end %>
+    <% end %>
+  </div>
+
   <footer><%= link_to render_name(review.user), user_path(review.user) %></footer>
 </blockquote>

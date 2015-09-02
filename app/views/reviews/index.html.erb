@@ -1,29 +1,23 @@
-<h1>Listing reviews for <%= link_to @product.title, product_path(@product) %></h1>
+<div container>
+  <div class="col-sm-12 col-md-12 col-lg-12">
+    <ol class="breadcrumb">
+      <li><%= link_to "Home", products_path %></li>
+      <li><%= link_to @product.title, product_path(@product) %></li>
+      <li class="active">All Reviews</li>
+    </ol>
 
-<table>
-
-<% @reviews.each do |review| %>
-  <tr>
-    <td><%= link_to render_name(review.user) + ": " , user_path(review.user) %></td>
-    <td><%= review.body %></td>
-    <td>&nbsp;</td>
-    <td><%= button_to("Show", [review.product, review], method: :get, class: "btn btn-primary") %></td>
-    <td>&nbsp;</td>
-    <% if authorized_user?(review.user) %>
-      <td><%= button_to("Edit", edit_product_review_path(review.product, review), method: :get, class: "btn btn-primary") %></td>
-      <td>&nbsp;</td>
-      <td><%= button_to("Delete", [review.product, review] , method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary") %></td>
+    <div class="panel panel-default">
+      <div class="panel-heading">Listing reviews for <%= link_to @product.title, product_path(@product) %></div>
+      <div class="panel-body">
+        <div id="show-reviews">
+          <%= render @reviews %>
+        </div>
+      </div>
+    </div>
+    <% if user_signed_in? %>
+      <%= button_to("Add a new review", new_product_review_path, class: "btn btn-primary", method: :get) unless authorized_user?(@product.user) %>
+    <%else %>
+      <%= link_to 'Sign in to add a new product', user_session_path %>
     <% end %>
-    <% if authorized_user?(@product.user) %>
-      <td><%= button_to("Delete", [review.product, review] , method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary") %></td>
-    <% end %>
-  </tr>
-<% end %>
-</table>
-
-<br />
-<% if user_signed_in? %>
-  <%= link_to 'New Review', new_product_review_path unless authorized_user?(@product.user) %>
-<%else %>
-  <%= link_to 'Sign In to review the product', user_session_path %>
-<% end %>
+  </div>
+</div>

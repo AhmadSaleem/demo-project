@@ -1,10 +1,18 @@
-<p id="notice"><%= notice %></p>
+<div container>
+  <div class="col-sm-12 col-md-12 col-lg-12">
+    <ol class="breadcrumb">
+      <li><%= link_to "Home", products_path %></li>
+      <li><%= link_to @review.product.title, product_path(@review.product) %></li>
+      <li><%= link_to "All Reviews", product_reviews_path(@review.product) %></li>
+      <li class="active">Show</li>
+    </ol>
 
-<div class="caption-full">
-  <%= link_to render_name(@review.user), user_path(@review.user) %>
-  <span>says about this product: "<%= @review.body %>"</span>
+    <blockquote>
+      <p><%= @review.body %></p>
+      <footer><%= link_to render_name(@review.user), user_path(@review.user) %></footer>
+    </blockquote>
+
+    <%= link_to 'Edit', edit_product_review_path(@review.product, @review) if authorized_user?(@review.user) %>
+
+  </div>
 </div>
-
-<%= link_to 'Edit', edit_product_review_path(@review.product, @review) if authorized_user?(@review.user) %>
-
-<%= link_to 'Back', product_reviews_path(@review.product) %>

@@ -1,6 +1,8 @@
 <h1>Editing review</h1>
 
 <%= render 'form' %>
-
-<%= link_to 'Show', [@review.product, @review] %> |
-<%= link_to 'Back', product_reviews_path(@review.product) %>
+<div container>
+  <div class="col-sm-12 col-md-12 col-lg-12">
+    <%= link_to 'Show', [@review.product, @review] %>
+  </div>
+</div>
