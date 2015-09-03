@@ -43,7 +43,6 @@
           <% @product.images.each do|image| %>
             <li>
               <div class="thumbnail show-thumb">
-                <% image.build if image.blank? %>
                 <%= image_tag render_large_photo(image), class: "img-large img-rounded img-responsive img-responsive-height" %>
               </div>
             </li>

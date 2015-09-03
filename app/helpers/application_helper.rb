@@ -8,12 +8,12 @@ module ApplicationHelper
   end
 
   def render_photo(image)
-    return if image.blank?
+    return Image::DEFAULT_URL if image.blank?
     image.photo.url(:small)
   end
 
   def render_large_photo(image)
-    return if image.blank?
+    return Image::DEFAULT_URL if image.blank?
     image.photo.url(:full)
   end
 
