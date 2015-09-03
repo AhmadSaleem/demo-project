@@ -1,15 +1,13 @@
-<p id="notice"><%= notice %></p>
-
 <div class="container">
   <div class="col-md-12">
+    <h1><%= link_to render_name(@user), user_path(@user) %></h1>
     <div class="row">
       <div class="col-sm-4 col-lg-4 col-md-4">
-        <div class="thumbnail thumb">
-          <%= image_tag render_photo(@user.image), class: "img img-responsive" %>
-          <div class="caption">
-            <h4 class="pull-right"><%= @user.email %></h4>
-            <h4><%= link_to render_name(@user), user_path(@user) %></h4>
-          </div>
+        <div class="thumbnail user-img">
+          <%= image_tag render_large_photo(@user.image), class: "img img-responsive img-responsive-height" %>
+        </div>
+        <div class="caption">
+          <h4><%= @user.email %></h4>
         </div>
       </div>
     </div>
@@ -28,7 +26,7 @@
             <div class="caption">
               <h4 class="pull-right">Rs. <%=  product.price.to_s %></h4>
               <h4><%= link_to product.title, product %></h4>
-              <%= button_to("Details...", product, class: "btn btn-primary", method: :get) %>
+              <%= link_to "Details", product, class: "btn btn-primary" %>
             </div>
           </div>
         </div>

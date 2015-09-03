@@ -2,14 +2,13 @@
 
 <div class="container">
   <div class="col-md-12">
+    <h1><%= link_to render_name(current_user), user_path(current_user) %></h1>
     <div class="row">
       <div class="col-sm-4 col-lg-4 col-md-4">
-        <div class="thumbnail thumb">
-          <%= image_tag render_photo(current_user.image), class: "img img-responsive" %>
-          <div class="caption">
-            <h4 class="pull-right"><%= current_user.email %></h4>
-            <h4><%= link_to render_name(current_user), user_path(current_user) %></h4>
-          </div>
+        <div class="thumbnail user-img">
+          <%= image_tag render_large_photo(current_user.image), class: "img img-responsive img-responsive-height" %>
+        </div>
+          <h3><%= current_user.email %></h3>
         </div>
       </div>
     </div>
@@ -17,8 +16,8 @@
 </div>
 
 <div class="container">
-  <h1>Your Products</h1>
   <div class="col-md-12">
+    <h1>Products</h1>
     <%= paginate @products %>
     <div class="row">
       <% @products.each do |product| %>
@@ -27,30 +26,27 @@
             <%= image_tag render_photo(product.images.first), class: "img img-responsive" %>
             <div class="caption">
               <h4><%= link_to product.title, product %></h4>
-              <%= button_to("Details...", product, class: "btn btn-primary", method: :get) %>
-              &nbsp;
-              <%= button_to("Edit", edit_product_path(product), class: "btn btn-primary", method: :get) %>
-              &nbsp;
-              <%= button_to("Delete", product, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary") %>
+              <%= link_to "Details", product, class: "btn btn-default btn-sm" %>
+              <%= link_to "Edit", edit_product_path(product), class: "btn btn-primary btn-sm" %>
+              <%= link_to "Delete", product, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-warning btn-sm" %>
             </div>
           </div>
         </div>
       <% end %>
     </div>
     <%= paginate @products %>
+  </div>
 
-    <h1>Your Reviews</h1>
-
-    <%= paginate @reviews %>
-
-    <% @reviews.each do |review| %>
-      <div><%= review.body %></div>
-      <div>
-        <%= link_to "Show", product_path(review.product), class: "btn btn-primary" %>
-        <%= link_to "Edit", edit_product_review_path(review.product, review), class: "btn btn-primary" %>
-        <%= link_to "Delete", [review.product, review], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">My Reviews</div>
+      <div class="panel-body">
+        <%= paginate @reviews %>
+        <div id="show-reviews">
+          <%= render @reviews %>
+        </div>
+        <%= paginate @reviews %>
       </div>
-    <% end %>
-    <%= paginate @reviews %>
+    </div>
   </div>
 </div>

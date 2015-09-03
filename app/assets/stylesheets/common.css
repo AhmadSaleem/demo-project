@@ -26,6 +26,12 @@ html, body {
   overflow: auto;
 }
 
+.user-img {
+  width: 300px;
+  height: 300px;
+  overflow: auto;
+}
+
 .img-responsive-height {
   display: block;
   width: auto;
@@ -33,12 +39,6 @@ html, body {
 }
 
 .user-thumb {
-  width: 300px;
-  height: 320px;
-  overflow: auto;
-}
-
-.thumb {
   width: 300px;
   height: 200px;
   overflow: auto;

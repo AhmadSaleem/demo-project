@@ -14,7 +14,7 @@
       <% end %>
     <% end %>
 
-    <% if authorized_user?(@product.user) %>
+    <% if authorized_user?(review.product.user) %>
       <%= link_to [review.product, review], method: :delete, data: { confirm: 'Are you sure?' } do %>
         <span class="glyphicon glyphicon-remove-circle" title="Delete"></span>
       <% end %>
