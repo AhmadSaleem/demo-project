@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-  PER_PAGE_SIZE = 5
+  PER_PAGE_SIZE = 9
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

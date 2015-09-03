@@ -1,5 +1,7 @@
 class Review < ActiveRecord::Base
 
+  paginates_per 5
+
   attr_accessible :body
 
   belongs_to :product

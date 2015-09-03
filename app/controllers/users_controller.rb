@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def dashboard
     @products = current_user.products.includes(:images).ordered.page(params[:page]).per(User::PER_PAGE_SIZE)
-    @reviews = current_user.reviews.includes(:product).ordered.page(params[:page]).per(User::PER_PAGE_SIZE)
+    @reviews = current_user.reviews.includes(:product).ordered.page(params[:page])
   end
 
   def show

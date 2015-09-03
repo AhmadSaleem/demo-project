@@ -12,7 +12,7 @@ class ReviewsController < ApplicationController
   respond_to :html
 
   def index
-    @reviews = @product.reviews
+    @reviews = @product.reviews.ordered.page(params[:page])
   end
 
   def show
