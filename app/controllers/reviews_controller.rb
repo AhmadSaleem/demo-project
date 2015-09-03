@@ -19,14 +19,14 @@ class ReviewsController < ApplicationController
   end
 
   def new
-    @review = @product.reviews.build
+    @review = @product.reviews.new
   end
 
   def edit
   end
 
   def create
-    @review = @product.reviews.build(params[:review])
+    @review = @product.reviews.new(params[:review])
     @review.user_id = current_user.id
     respond_to do |format|
       if @review.save
