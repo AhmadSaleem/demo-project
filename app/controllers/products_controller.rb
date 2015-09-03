@@ -38,7 +38,7 @@ class ProductsController < ApplicationController
 
   def destroy
     @product.destroy
-    respond_with(@product)
+    redirect_to :back
   end
 
   private
