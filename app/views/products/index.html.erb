@@ -2,19 +2,6 @@
 
 <h1>Listing products</h1>
 
-<div class="pull-right">
-  <form class="navbar-form" role="search">
-    <div class="form-group">
-      <%= text_field_tag :search %>
-    </div>
-    <div class="form-group">
-      <%= link_to products_path, type: "submit", class: "btn btn-default" do %>
-        <span class="glyphicon glyphicon-search"></span>
-      <% end %>
-    </div>
-  </form>
-</div>
-
 <div class="container">
   <div class="col-md-12">
     <%= paginate @products %>
