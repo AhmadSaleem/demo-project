@@ -1,52 +1,61 @@
-<h1>Listing Order Details</h1>
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <table class="table">
-        <tr>
-          <th>Title</th>
-          <th>Price</th>
-          <th>Details</th>
-          <th></th>
-        </tr>
-        <% if @products %>
-          <% @products.each do |product| %>
-            <tr id=<%= "row-#{product.id}" %>>
-              <td><%= product.title %></td>
-              <td>Rs. <%= product.price %></td>
-              <td><%= link_to "Details", product_path(product), class: 'btn btn-default' %></td>
-              <td><%= link_to "Remove from cart", carts_remove_from_cart_path(product), data: { remote: true, confirm: 'Are you sure?', params: { product_id: product.id }.to_param }, class: 'btn btn-warning' %></td>
-            </tr>
+<% if @size.zero? %>
+  <h3>The cart is empty. Please fill it with some products.</h3>
+  <%= link_to "Go Back to the Shop", products_path, class: "btn btn-primary" %>
+<% else %>
+  <div class="container">
+    <div class="col-md-1">
+    </div>
+    <div class="row">
+      <div class="col-md-10">
+        <p id="flash-notice"></p>
+        <p id="flash-alert"></p>
+        <h1>Cart</h1>
+        <table class="table">
+          <tr>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Details</th>
+            <th></th>
+          </tr>
+          <% if @products %>
+            <% @products.each do |product| %>
+              <tr id=<%= "row-#{product.id}" %>>
+                <td><%= product.title %></td>
+                <td><%= number_to_currency(product.price.to_s) %></td>
+                <td><%= link_to "Details", product_path(product), class: 'btn btn-default' %></td>
+                <td><%= link_to "Remove from cart", carts_remove_from_cart_path(product), data: { remote: true, confirm: 'Are you sure?', params: { product_id: product.id }.to_param }, class: 'btn btn-warning' %></td>
+              </tr>
+            <% end %>
+          <% end %>
+          <tr>
+            <td> Total Price: </td>
+            <td id="total-price"><%= number_to_currency(@total_price.to_s) %></td>
+            <td> Discount Offered:</td>
+            <td id="show-discount"><%= number_to_currency(@total_discount) %></td>
+          </tr>
+        </table>
+
+        <div class="form-group">
+          <label id="payable-amount">Payable amount: <%= number_to_currency(@payable_amount) %></label>
+        </div>
+
+        <% unless cookies[:coupon] || @cart.blank? %>
+          <%= form_for(@discount, remote: true, html: { class: "form-horizontal", id: 'get-discount' }) do |f| %>
+            <div class="form-group col-md-6" >
+              <%= f.text_field :coupon, class:"form-control", placeholder: "Enter a valid coupon to avail discount" %>
+            </div>
+            <div class="form-group col-md-4">
+              <%= f.submit class: 'btn btn-success', value: "Get Discount" %>
+            </div>
           <% end %>
         <% end %>
-        <tr>
-          <td> Total Price: </td>
-          <td id="total-price">Rs. <%= @total_price %></td>
-          <td> Discount Offered:</td>
-          <td id="show-discount"><%= @total_discount %></td>
-        </tr>
-      </table>
-    </div>
 
-    <div class="form-group">
-      <label id="payable-amount">Payable amount: Rs. <%= @payable_amount %></label>
-    </div>
-
-    <% unless cookies[:coupon] || @cart.blank? %>
-      <%= form_for(@discount, remote: true, html: { class: "form-horizontal", id: 'get-discount' }) do |f| %>
         <div class="form-group">
-          <%= f.text_field :coupon, class:"form-control", placeholder: "Enter a valid coupon to avail discount" %>
-          <label id="valid-coupon"></label>
+          <%= link_to "Checkout", new_order_path, class: "btn btn-success pull-right" %>
+          <div class="clearfix mrgn-btm"></div>
+          <%= link_to "Add more products", products_path, class: "btn btn-primary pull-right" %>
         </div>
-        <div class="form-group">
-          <%= f.submit class: 'btn btn-success', value: "Get Discount" %>
-        </div>
-      <% end %>
-    <% end %>
-
-    <div class="form-group">
-      <%= link_to "Checkout", new_order_path, class: "btn btn-success pull-right" %>
+      </div>
     </div>
-
   </div>
-</div>
+<% end %>

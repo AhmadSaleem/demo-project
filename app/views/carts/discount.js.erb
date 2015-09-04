@@ -1,7 +1,11 @@
 <% unless @total_discount.zero? %>
   $('#get-discount').hide();
+  $('#flash-alert').hide();
+  $('#flash-notice').html("<%= flash[:notice] %>");
+  $('#flash-notice').delay(5000).fadeOut(400);
+  $('#show-discount').text("$" + <%= @total_discount %>);
+  $('#payable-amount').text("Payable amount: $" + <%= @payable_amount %>);
+<% else %>
+  $('#flash-alert').html("<%= flash[:alert] %>");
+  $('#flash-alert').delay(5000).fadeOut(400)
 <% end %>
-$('#show-discount').text(<%= @total_discount %>);
-$('#payable-amount').text("Payable amount: " + <%= @payable_amount %>);
-$("#notice").html("<%= flash[:notice] %>");
-$("#alert").html("<%= flash[:alert] %>");

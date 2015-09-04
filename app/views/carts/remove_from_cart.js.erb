@@ -1,5 +1,5 @@
 $('#row-<%= @product.id %>').hide();
 $('#cart-items').text(<%= @size %>);
-$('#total-price').text(<%= @total_price %>);
-$('#show-discount').text(<%= @total_discount %>);
-$('#payable-amount').text("Payable amount: " + <%= @payable_amount %>);
+$('#total-price').text("$" + <%= @total_price %>);
+$('#show-discount').text("$" + <%= @total_discount %>);
+$('#payable-amount').text("Payable amount: $" + <%= @payable_amount %>);

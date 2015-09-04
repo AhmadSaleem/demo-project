@@ -1,7 +1,5 @@
 <% if @cart.blank? %>
   <h4>Your Cart is Empty. Please fill it with some items first.</h4>
-<% elsif @order.total_price < 100 %>
-  <h4>You need to have items worth at least Rs. 100 in your cart to get them delivered.</h4>
 <% else %>
   <%= form_for(@order) do |f| %>
     <% if @order.errors.any? %>
@@ -16,32 +14,34 @@
     <% end %>
 
     <%= f.hidden_field :stripe_card_token %>
-    <label id="payable-amount">Payable amount: Rs. <b><%= @order.total_price %><b></label>
-    <div class="field">
+
+    <div class="field mrgn-btm">
       <%= f.label :shipping_address, "Shipping Address" %>
       <%= f.text_area :shipping_address, rows: "3", class: "form-control" %>
     </div>
-    <div class="field">
+
+    <div class="field mrgn-btm">
       <%= f.hidden_field :discount %>
     </div>
-    <% if @order.stripe_card_token.present? %>
-      Credit card has been provided. You just need to confirm the shipping address.
-    <% else %>
-      <div class="field">
-        <%= label_tag :card_number, "Credit Card Number" %>
-        <%= text_field_tag :card_number, nil, name: nil, class: "form-control" %>
-      </div>
-      <div class="field">
-        <%= label_tag :card_code, "Security Code on Card (CVV)" %>
-        <%= text_field_tag :card_code, nil, name: nil, class: "form-control" %>
-      </div>
-      <div class="field">
-        <%= label_tag :card_month, "Card Expiration" %>
-        <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"} %>
-        <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"} %>
-      </div>
-    <% end %>
-    <div class="actions">
+
+    <div class="field mrgn-btm">
+      <%= label_tag :card_number, "Credit Card Number" %>
+      <%= text_field_tag :card_number, nil, name: nil, class: "form-control" %>
+    </div>
+
+    <div class="field mrgn-btm">
+      <%= label_tag :card_code, "Security Code on Card (CVV)" %>
+      <%= text_field_tag :card_code, nil, name: nil, class: "form-control" %>
+    </div>
+
+    <div class="field mrgn-btm">
+      <%= label_tag :card_month, "Card Expiration" %>
+      <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"} %>
+      <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"} %>
+    </div>
+
+    <label class="mrgn-btm" id="payable-amount">Payable amount: <b><%= number_to_currency(@order.total_price) %><b></label>
+    <div class="actions mrgn-btm">
       <%= f.submit "Place your order", class: "btn btn-primary" %>
     </div>
   <% end %>
