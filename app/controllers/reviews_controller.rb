@@ -1,9 +1,7 @@
 class ReviewsController < ApplicationController
 
   before_filter :set_product
-
   before_filter :set_review, only: [:show, :edit, :update, :destroy]
-
   before_filter :authenticate_user!, except: [:index, :show]
   before_filter :create_authorization, only: [:new, :create]
   before_filter :edit_authorization, only: [:edit, :update]
@@ -28,6 +26,7 @@ class ReviewsController < ApplicationController
   def create
     @review = @product.reviews.new(params[:review])
     @review.user_id = current_user.id
+
     respond_to do |format|
       if @review.save
         format.html { redirect_to @product, notice: 'Review was successfully created.' }

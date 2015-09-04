@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+
   before_filter :authenticate_user!
 
   def new
@@ -29,8 +30,9 @@ class OrdersController < ApplicationController
       cookies.delete :products
       redirect_to products_path, notice: "Thank you for buying!"
     else
-      render :new, notice: "Error"
+      render :new, alert: "An error occurred while saving your order."
     end
   end
+
 end
 
