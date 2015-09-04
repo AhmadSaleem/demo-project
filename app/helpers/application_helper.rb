@@ -1,10 +1,11 @@
 module ApplicationHelper
+
   def authorized_user?(user)
     user_signed_in? && current_user == user
   end
 
   def render_name(user)
-    [user.first_name, user.last_name].join(" ")
+    [user.first_name, user.last_name].join(" ").titleize
   end
 
   def render_photo(image)
