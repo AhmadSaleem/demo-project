@@ -12,7 +12,7 @@ class CartsController < ApplicationController
   def add_to_cart
     if cookies[:products]
       cart = get_products(cookies[:products])
-      cookies[:products] = { value: add_product(cart.push(@product.id)) } unless cart.include?(@product.id.to_s)
+      cookies[:products] = { value: add_product(cart.push(@product.id))} unless cart.include?(@product.id)
     else
       cookies[:products] = { value: add_product([@product.id]) }
     end

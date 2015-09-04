@@ -23,7 +23,7 @@
                 <td><%= product.title %></td>
                 <td><%= number_to_currency(product.price.to_s) %></td>
                 <td><%= link_to "Details", product_path(product), class: 'btn btn-default' %></td>
-                <td><%= link_to "Remove from cart", carts_remove_from_cart_path(product), data: { remote: true, confirm: 'Are you sure?', params: { product_id: product.id }.to_param }, class: 'btn btn-warning' %></td>
+                <td><%= link_to "Remove from cart", carts_remove_from_cart_path(product), data: { remote: true, params: { product_id: product.id }.to_param }, class: 'btn btn-warning' %></td>
               </tr>
             <% end %>
           <% end %>
