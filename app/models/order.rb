@@ -14,7 +14,7 @@ class Order < ActiveRecord::Base
   def self.charge(total, token, user)
     Stripe::Charge.create(
       amount: (total.to_f * 100).to_i,
-      currency: "pkr",
+      currency: "usd",
       source: token,
       receipt_email: user.email,
     )
