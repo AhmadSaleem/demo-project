@@ -1,6 +1,6 @@
 class UserMailer < ActionMailer::Base
 
-  default from: "ahmad.saleem@square63.com"
+  default from: "admin@virtualbazar.com"
 
   def send_receipt(params)
     @user = params[:user]
