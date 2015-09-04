@@ -1,6 +1,6 @@
 <%= render 'modal' %>
 
-<h1>Listing products</h1>
+<h1>Products</h1>
 
 <div class="container">
   <div class="col-md-12">
@@ -9,15 +9,19 @@
       <% @products.each do |product| %>
         <div class="col-sm-4 col-lg-4 col-md-4">
           <div class="thumbnail product-thumb">
-            <%= image_tag render_photo(product.images.first), class: "img img-responsive" %>
+            <div class="img">
+              <%= link_to product do %>
+                <%= image_tag render_photo(product.images.first), class: "img img-responsive img-responsive-height" %>
+              <% end %>
+            </div>
             <div class="caption inline">
-              <h4 class="pull-right">Rs. <%= product.price.to_s %></h4>
-              <h4><%= link_to product.title, product %></h4>
+              <h2 class="price pull-right"><%= number_to_currency(product.price.to_s) %></h4>
+              <h2 class="title"><%= link_to render_title(product), product %></h4>
               <%= link_to 'Add to cart', carts_add_to_cart_path, id: "add-#{product.id}", data: { remote: true, target: '#myModal', toggle: 'modal', params: { product_id: product.id }.to_param }, class: 'btn btn-primary pull-right' if @cart.blank? %>
               <% unless @cart.blank? || @cart.include?(product.id) %>
                 <%= link_to 'Add to cart', carts_add_to_cart_path, id: "add-#{product.id}", data: { remote: true, target: '#myModal', toggle: 'modal', params: { product_id: product.id }.to_param }, class: 'btn btn-primary pull-right' %>
               <% end %>
-              <%= button_to("Details...", product, method: :get, class: "btn btn-default") %>
+              <%= button_to("Details", product, method: :get, class: "btn btn-default") %>
             </div>
           </div>
         </div>
