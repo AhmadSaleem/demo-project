@@ -1,28 +1,21 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Demo</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "https://js.stripe.com/v1/", "application" %>
-  <%= csrf_meta_tags %>
-  <%= tag :meta, name: "stripe-key", content: STRIPE_PUBLIC_KEY %>
-</head>
+  <head>
+    <title>Demo</title>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "https://js.stripe.com/v1/", "application" %>
+    <%= csrf_meta_tags %>
+    <%= tag :meta, name: "stripe-key", content: STRIPE_PUBLIC_KEY %>
+  </head>
 
-<body>
-  <div class="wrap-container">
-    <%= render 'layouts/header' %>
-
-    <% if notice %>
-      <p id="notice" class="alert alert-info"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p id="alert" class="alert alert-warning"><%= alert %></p>
-    <% end %>
-
-    <div class="container">
-      <%= yield %>
+  <body>
+    <div class="wrap-container">
+      <%= render 'layouts/header' %>
+      <div class="container">
+        <%= render 'layouts/flash_messages' %>
+        <%= yield %>
+      </div>
     </div>
-  </div>
-  <%= render 'layouts/footer' %>
-</body>
+    <%= render 'layouts/footer' %>
+  </body>
 </html>

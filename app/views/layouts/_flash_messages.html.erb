@@ -1,0 +1,18 @@
+<div class="flash"></div>
+<% if notice %>
+  <div id="notice" class="alert alert-info alert fade in alert-dismissible">
+    <%= notice %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<% end %>
+
+<% if alert %>
+  <div id="alert" class="alert alert-warning alert fade in alert-dismissible">
+    <%= alert %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<% end %>
