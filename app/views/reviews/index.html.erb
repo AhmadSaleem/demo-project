@@ -7,7 +7,9 @@
     </ol>
 
     <div class="panel panel-default">
-      <div class="panel-heading">Listing reviews for <%= link_to @product.title, product_path(@product) %></div>
+      <div class="panel-heading">
+        <h1>Listing reviews for <%= link_to @product.title, product_path(@product) %></h1>
+      </div>
       <div class="panel-body">
         <%= paginate @reviews %>
         <div id="show-reviews">
@@ -16,10 +18,6 @@
         <%= paginate @reviews %>
       </div>
     </div>
-    <% if user_signed_in? %>
-      <%= button_to("Add a new review", new_product_review_path, class: "btn btn-primary", method: :get) unless authorized_user?(@product.user) %>
-    <% else %>
-      <%= link_to 'Sign in to add a new product', user_session_path %>
-    <% end %>
+    <%= button_to("Add a new review", new_product_review_path, class: "btn btn-primary", method: :get) unless authorized_user?(@product.user) %>
   </div>
 </div>

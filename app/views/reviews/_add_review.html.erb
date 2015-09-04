@@ -1,10 +1,10 @@
 <% if user_signed_in? %>
   <% unless authorized_user?(@product.user) %>
     <div class="col-sm-12 col-md-12 col-lg-12">
-      <h4>Add a Review</h4>
+      <h2>Add a Review</h2>
       <%= form_for([@product, @review], remote: true, html: { class: "form-horizontal", id: 'add-review-form' }) do |f| %>
         <div class="form-group">
-        <%= f.text_area :body, required: true, class: "form-control input-sm", placeholder: "Write a review of this product...", rows: 3 %>
+        <%= f.text_area :body, required: true, class: "form-control input-sm", placeholder: "Write a review of this product", rows: 3 %>
         </div>
         <div class="form-group">
           <%= f.submit class: "btn btn-primary" %>
@@ -12,6 +12,4 @@
       <% end %>
     </div>
   <% end %>
-<%else %>
-  <%= link_to 'Sign In to review the product', user_session_path %>
 <% end %>

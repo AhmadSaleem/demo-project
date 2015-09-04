@@ -1,3 +1,5 @@
+<%= render 'modal' %>
+
 <div class="container">
 
   <div class="col-sm-12 col-md-12 col-lg-12">
@@ -11,25 +13,23 @@
     <% if authorized_user?(@product.user) %>
       <%= link_to 'Edit', edit_product_path(@product), class: "pull-right" %>
     <% end %>
-  </div>
-
-  <div class="col-sm-12 col-md-12 col-lg-12">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <%= @product.title %>
-        <%= link_to render_name(@product.user), user_path(@product.user), class: "pull-right" %>
+        <h1><%= @product.title %></h1>
       </div>
       <div class="panel-body">
         <div class="col-sm-10 col-md-10 col-lg-10">
           <span><%= render_description(@product) %></span>
         </div>
         <div class="col-sm-2 col-md-2 col-lg-2">
-          <b class="pull-right">Rs. <%= @product.price %></b>
+          <h3 class="pull-right"><%= number_to_currency(@product.price) %></h3>
           <div class="clearfix"></div>
           <%= link_to 'Add to cart', carts_add_to_cart_path, id: "add-#{@product.id}", data: { remote: true, target: '#myModal', toggle: 'modal', params: { product_id: @product.id }.to_param }, class: 'btn btn-primary pull-right' if @cart.blank? %>
           <% unless @cart.blank? || @cart.include?(@product.id) %>
             <%= link_to 'Add to cart', carts_add_to_cart_path, id: "add-#{@product.id}", data: { remote: true, target: '#myModal', toggle: 'modal', params: { product_id: @product.id }.to_param }, class: 'btn btn-primary pull-right' %>
           <% end %>
+          <div class="clearfix"></div>
+          <%= link_to render_name(@product.user), user_path(@product.user), class: "pull-right" %>
         </div>
       </div>
     </div>
@@ -37,7 +37,9 @@
 
   <div class="col-sm-12 col-md-12 col-lg-12">
     <div class="panel panel-default">
-      <div class="panel-heading">Gallery</div>
+      <div class="panel-heading">
+        <h2>Gallery</h2>
+      </div>
       <div class="panel-body">
         <ul class="list-inline">
           <% @product.images.each do|image| %>
@@ -54,7 +56,9 @@
 
   <div class="col-sm-12 col-md-12 col-lg-12">
     <div class="panel panel-default">
-      <div class="panel-heading">Reviews</div>
+      <div class="panel-heading">
+        <h2>Reviews</h2>
+      </div>
       <div class="panel-body">
         <div id="show-reviews">
           <%= render @product.reviews %>
